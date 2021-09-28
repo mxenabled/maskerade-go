@@ -20,7 +20,6 @@ func ReplaceCharacterAtIndexInString(str string, replacementToken string, indice
 	return b.String()
 }
 
-
 func intInSlice(a int, arr []int) bool {
 	for _, b := range arr {
 		if b == a {

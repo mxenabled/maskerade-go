@@ -2,8 +2,8 @@ package maskerade
 
 import (
 	"github.com/joeljunstrom/go-luhn"
-	"github.com/mxenabled/maskerade-go/ranges"
 	"github.com/mxenabled/maskerade-go/helpers"
+	"github.com/mxenabled/maskerade-go/ranges"
 	"regexp"
 	"strings"
 )
@@ -69,7 +69,7 @@ func tryAllPatterns(value string, creditCardPatterns []*regexp.Regexp) []ranges.
 		}
 	}
 
-	contingousMatches := ranges.FindLargest(allMatches)
+	contingousMatches := ranges.FindLargestRanges(allMatches)
 	if len(contingousMatches) == 0 {
 		return nil
 	} else {
@@ -101,5 +101,5 @@ func maskOne(value string, options *CreditCardMasker) string {
 		}
 	}
 
-	return replaceCharacterAtIndexInString(value, options.ReplacementToken, indicesToMask)
+	return helpers.ReplaceCharacterAtIndexInString(value, options.ReplacementToken, indicesToMask)
 }

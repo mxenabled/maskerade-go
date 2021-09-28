@@ -19,7 +19,8 @@ func (r MatchRange) intersects(other MatchRange) bool {
 	return r.End >= other.Start && r.Start <= other.End
 }
 
-func FindLargest(slices []MatchRange) []MatchRange {
+// FindLargestRanges returns an array of the largest, non intersecting supersets given.
+func FindLargestRanges(slices []MatchRange) []MatchRange {
 	bestSlices := map[MatchRange]bool{}
 
 	for _, r := range slices {

@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestFindLargest(t *testing.T) {
+func TestFindLargestRanges(t *testing.T) {
 
 	t.Run("one large with two subsets", func(t *testing.T) {
 
@@ -13,7 +13,7 @@ func TestFindLargest(t *testing.T) {
 		b := MatchRange{Start: 2, End: 5}
 		c := MatchRange{Start: 1, End: 10}
 
-		actual := FindLargest([]MatchRange{a, b, c})
+		actual := FindLargestRanges([]MatchRange{a, b, c})
 
 		expected := []MatchRange{c}
 
@@ -27,7 +27,7 @@ func TestFindLargest(t *testing.T) {
 		c := MatchRange{Start: 21, End: 40}
 		d := MatchRange{Start: 25, End: 40}
 
-		actual := FindLargest([]MatchRange{a, b, c, d})
+		actual := FindLargestRanges([]MatchRange{a, b, c, d})
 
 		expected := []MatchRange{a, c}
 
@@ -40,7 +40,7 @@ func TestFindLargest(t *testing.T) {
 		b := MatchRange{Start: 1, End: 3}
 		c := MatchRange{Start: 1, End: 4}
 
-		actual := FindLargest([]MatchRange{a, b, c})
+		actual := FindLargestRanges([]MatchRange{a, b, c})
 
 		expected := []MatchRange{a} // or c
 
@@ -54,7 +54,7 @@ func TestFindLargest(t *testing.T) {
 		a := MatchRange{Start: 1, End: 4}
 		b := MatchRange{Start: 2, End: 5}
 
-		actual := FindLargest([]MatchRange{a, b})
+		actual := FindLargestRanges([]MatchRange{a, b})
 
 		expected := []MatchRange{a, b}
 
