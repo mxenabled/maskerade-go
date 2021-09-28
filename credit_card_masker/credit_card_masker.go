@@ -3,11 +3,12 @@ package maskerade
 import (
 	"github.com/joeljunstrom/go-luhn"
 	"github.com/mxenabled/maskerade-go/ranges"
+	"github.com/mxenabled/maskerade-go/helpers"
 	"regexp"
 	"strings"
 )
 
-var creditCardRegexes = []*regexp.Regexp{
+var creditCardPatterns = []*regexp.Regexp{
 	/* maestro */ regexp.MustCompile(`\b(?:5[06-8]|6\d)\d{2}[ -]?\d{4}[ -]?\d{4}[ -]?\d{0,7}\b`),
 	/* visa */ regexp.MustCompile(`\b4\d{3}[ -]?\d{4}[ -]?\d{4}[ -]?(?:\d|\d{4}|\d{7})\b`),
 	/* amex */ regexp.MustCompile(`\b3[47]\d{2}[ -]?\d{6}[ -]?\d{5}\b`),
@@ -46,7 +47,7 @@ func NewCreditCardMasker(parameters Parameters) *CreditCardMasker {
 }
 
 func (c *CreditCardMasker) Mask(value string) string {
-	matchedPatterns := tryAllPatterns(value, creditCardRegexes)
+	matchedPatterns := tryAllPatterns(value, creditCardPatterns)
 
 	originalValue := value
 	for _, matchedPattern := range matchedPatterns {
@@ -101,29 +102,4 @@ func maskOne(value string, options *CreditCardMasker) string {
 	}
 
 	return replaceCharacterAtIndexInString(value, options.ReplacementToken, indicesToMask)
-}
-
-func intInSlice(a int, arr []int) bool {
-	for _, b := range arr {
-		if b == a {
-			return true
-		}
-	}
-	return false
-}
-
-func replaceCharacterAtIndexInString(str string, ReplacementToken string, indices []int) string {
-	var b strings.Builder
-
-	b.Grow(len(str))
-
-	for i, rune := range str {
-		if intInSlice(i, indices) {
-			b.WriteString(ReplacementToken)
-		} else {
-			b.WriteRune(rune)
-		}
-	}
-
-	return b.String()
 }
