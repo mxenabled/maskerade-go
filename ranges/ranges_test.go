@@ -31,7 +31,7 @@ func TestFindLargestRanges(t *testing.T) {
 
 		expected := []MatchRange{a, c}
 
-		assert.Equal(t, expected, actual, "1..19, 21..40 both ranges")
+		assert.ElementsMatch(t, expected, actual, "1..19, 21..40 both ranges")
 	})
 
 	t.Run("dupes", func(t *testing.T) {
@@ -44,7 +44,7 @@ func TestFindLargestRanges(t *testing.T) {
 
 		expected := []MatchRange{a} // or c
 
-		assert.Equal(t, expected, actual, "1..4 should be the only range")
+		assert.ElementsMatch(t, expected, actual, "1..4 should be the only range")
 	})
 
 	// ranges are expected to be subsets of one another, and never resulting
