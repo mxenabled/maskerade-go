@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.17
+
+    working_directory: /go/src/github.com/mxenabled/maskerade-go
+    steps:
+      - checkout
+
+      # styles
+      - run: gofmt -s -d -l $(find . -type f -name '*.go' -not -path "./vendor/*" -not -path "./.git/*") >> style_changes.txt
+      - run: cat style_changes.txt
+      - run: cat style_changes.txt | read && exit 1 || true
+
+      - run: go build -v
+      - run: go test -v ./...
