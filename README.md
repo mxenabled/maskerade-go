@@ -10,7 +10,7 @@ masker := NewAccountNumberMasker(Parameters{
     ReplacementToken: "X",
     ExposeLast: 2,
 })
-masker.Mask("5555-5555-5555-5555")  # "XXXX-XXXX-XXXX-XX55"
+masker.Mask("5555-5555-5555-5555") // "XXXX-XXXX-XXXX-XX55"
 ```
 
 ## Credit Card Number Masker Usage
@@ -21,7 +21,7 @@ masker := NewCreditCardMasker(Parameters{
     ReplacementToken: "X",
     ExposeLast: 2,
 })
-masker.Mask("5555-5555-5555-5555")  # "XXXX-XXXX-XXXX-XX55"
+masker.Mask("5555-5555-5555-5555") // "XXXX-XXXX-XXXX-XX55"
 ```
 
 ```go
@@ -29,7 +29,7 @@ masker.Mask("5555-5555-5555-5555")  # "XXXX-XXXX-XXXX-XX55"
 masker := NewCreditCardMasker(Parameters{
     ReplacementText: "[MASKED]"
 })
-masker.Mask("my credit card number is 4242 4242 4242 4242")  # "my credit card number is[MASKED]"
+masker.Mask("my credit card number is 4242 4242 4242 4242") // "my credit card number is[MASKED]"
 ```
 
 ## Notes
