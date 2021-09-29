@@ -24,15 +24,18 @@ type AccountNumberMasker struct {
 }
 
 type Parameters struct {
-	ReplacementText  string
 	ReplacementToken string
 	ExposeLast       int
 }
 
 // NewAccountNumberMasker will return a AccountNumberMasker and ensure a ReplacementToken is set
 func NewAccountNumberMasker(parameters Parameters) *AccountNumberMasker {
-	if parameters.ReplacementToken == "" {
+	if parameters.ReplacementToken == "" || len(parameters.ReplacementToken) > 1 {
 		parameters.ReplacementToken = "X"
+	}
+
+	if parameters.ExposeLast < 0 {
+		parameters.ExposeLast = 0
 	}
 
 	return &AccountNumberMasker{
@@ -65,7 +68,7 @@ func (a *AccountNumberMasker) Mask(desc string) string {
 		}
 
 		if !found {
-			desc = strings.ReplaceAll(desc, matchedNumber, maskAllButLastFour(matchedNumber, a.ReplacementToken))
+			desc = strings.ReplaceAll(desc, matchedNumber, maskAllButLastFour(matchedNumber, a.ReplacementToken, a.ExposeLast))
 		}
 	}
 
@@ -74,9 +77,7 @@ func (a *AccountNumberMasker) Mask(desc string) string {
 
 var matchNumbers = regexp.MustCompile(`[\d]`)
 
-func maskAllButLastFour(value string, replacementToken string) string {
-	exposeLast := 4
-
+func maskAllButLastFour(value string, replacementToken string, exposeLast int) string {
 	allNumberIndices := matchNumbers.FindAllStringIndex(value, -1)
 	numbersToKeep := len(allNumberIndices) - exposeLast
 

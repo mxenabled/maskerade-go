@@ -37,8 +37,12 @@ type Parameters struct {
 
 // NewCreditCardMasker will return a CreditCardMasker and ensure a ReplacementToken is set
 func NewCreditCardMasker(parameters Parameters) *CreditCardMasker {
-	if parameters.ReplacementToken == "" {
+	if parameters.ReplacementToken == "" || len(parameters.ReplacementToken) > 1 {
 		parameters.ReplacementToken = "X"
+	}
+
+	if parameters.ExposeLast < 0 {
+		parameters.ExposeLast = 0
 	}
 
 	return &CreditCardMasker{

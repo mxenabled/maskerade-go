@@ -32,11 +32,27 @@ func TestMask(t *testing.T) {
 		{value: "Share Draft # 555555", expected: "Share Draft # 555555"},
 	}
 
-	accountNumberMasker := NewAccountNumberMasker(Parameters{})
+	accountNumberMasker := NewAccountNumberMasker(Parameters{
+		ExposeLast: 4,
+	})
 
 	for _, testCase := range testCases {
 		got := accountNumberMasker.Mask(testCase.value)
 
 		assert.Equal(t, testCase.expected, got)
 	}
+}
+
+func TestParameters(t *testing.T) {
+	accountNumberMasker := NewAccountNumberMasker(Parameters{
+		ReplacementToken: "TOOLONG",
+	})
+	got := accountNumberMasker.Mask("5555-5555-5555-5555")
+	assert.Equal(t, "XXXX-XXXX-XXXX-XXXX", got)
+
+	accountNumberMasker = NewAccountNumberMasker(Parameters{
+		ExposeLast: -1,
+	})
+	got = accountNumberMasker.Mask("5555-5555-5555-5555")
+	assert.Equal(t, "XXXX-XXXX-XXXX-XXXX", got)
 }

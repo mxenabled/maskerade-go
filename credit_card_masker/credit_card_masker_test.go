@@ -529,3 +529,17 @@ func TestMaskWithReplacementText(t *testing.T) {
 		assert.Equal(t, testCase.expected, got)
 	}
 }
+
+func TestParameters(t *testing.T) {
+	creditCardMasker := NewCreditCardMasker(Parameters{
+		ReplacementToken: "TOOLONG",
+	})
+	got := creditCardMasker.Mask("4242 4242 4242 4242")
+	assert.Equal(t, "XXXX XXXX XXXX XXXX", got)
+
+	creditCardMasker = NewCreditCardMasker(Parameters{
+		ExposeLast: -1,
+	})
+	got = creditCardMasker.Mask("4242 4242 4242 4242")
+	assert.Equal(t, "XXXX XXXX XXXX XXXX", got)
+}
