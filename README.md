@@ -27,7 +27,7 @@ masker.Mask("5555-5555-5555-5555") // "XXXX-XXXX-XXXX-XX55"
 ```go
 
 masker := NewCreditCardMasker(Parameters{
-    ReplacementText: "[MASKED]"
+    ReplacementText: "[MASKED]",
 })
 masker.Mask("my credit card number is 4242 4242 4242 4242") // "my credit card number is[MASKED]"
 ```
