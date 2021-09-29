@@ -38,7 +38,7 @@ import (
 masker := creditMasker.NewCreditCardMasker(creditMasker.Parameters{
     ReplacementText: "[MASKED]",
 })
-masker.Mask("my credit card number is 4242 4242 4242 4242") // "my credit card number is[MASKED]"
+masker.Mask("my credit card number is 4242 4242 4242 4242") // "my credit card number is [MASKED]"
 ```
 
 ## Notes
