@@ -36,4 +36,4 @@ masker.Mask("my credit card number is 4242 4242 4242 4242") // "my credit card n
 
 Golang Port of https://github.com/mxenabled/maskerade
 * Works for multiple credit card numbers in the same string.
-* Works for account numbers over 7 digits & hyphens long
+* Works for account numbers over 7 digits
