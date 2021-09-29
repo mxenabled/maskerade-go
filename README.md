@@ -27,7 +27,7 @@ masker := creditMasker.NewCreditCardMasker(creditMasker.Parameters{
     ReplacementToken: "X",
     ExposeLast: 2,
 })
-masker.Mask("5555-5555-5555-5555") // "XXXX-XXXX-XXXX-XX55"
+masker.Mask("my credit card number is 4242-4242-4242-4242") // "my credit card number is XXXX-XXXX-XXXX-XX42"
 ```
 
 ```go
